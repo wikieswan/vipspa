@@ -1,0 +1,288 @@
+@charset "utf-8";
+$text-red-banner:#f21276;
+$text-red:#f21377;
+$black:#000;
+$grey-dark:#333;
+$grey-little-dark:#666;
+$grey:#999;
+$grey-light:#ddd;
+$white:#fff;
+$body-bg:#f2f2f2;
+$head-bg:#fff;
+$banner:#fffee4;
+$blue:#079fff;
+
+
+
+* {
+  	-webkit-box-sizing: border-box;
+  	-moz-box-sizing: border-box;
+  	box-sizing: border-box;
+  	margin: 0;
+  	padding: 0;
+}
+html {
+  	font-family:"Helvetica Regular",Helvetica,STHeiTi,Arial,sans-serif;
+	-ms-text-size-adjust:100%;
+	-webkit-text-size-adjust:100%;
+	font-size:62.5%;
+	height:100%;
+}
+body,#ui-view{
+	height:100%;
+	background:$body-bg;
+}
+
+
+
+
+.hide{
+	display:none;
+}
+
+.container{
+	position:relative;
+	width:100%;
+	min-height:100%;
+	height:auto;
+	//min-height:50rem;
+}
+
+
+
+.row{
+	width:100%;
+}
+
+.row-margin-top-1{
+	margin-top:1rem;
+}
+.row-float{
+	float:left;
+}
+.content{
+	width:100%;
+	padding:0 1rem;
+}
+.head{
+	position:relative;
+	width:100%;
+	height:5rem;
+	line-height:5rem;
+	text-align:center;
+	font-size:2rem;
+	border-bottom:1px solid $grey-light;
+	background:$head-bg;
+	color:$grey-dark;
+	.back{
+		position: absolute;
+		left: 1.5rem;
+		top: 1.9rem;
+		font-size: 1.3rem;
+	}
+	.close{
+		position:absolute;
+		line-height:2rem;
+		text-align: right;
+		bottom:1rem;
+		right: 1rem;
+		height: 2rem;
+		font-size: 1.3rem;
+		color: $grey;
+	}
+	.head-btn{
+		position:absolute;
+		bottom:1rem;
+		right: 1rem;
+		padding: 0.3rem 0.8rem ;
+		//margin-top: 1.5rem;
+		//margin-right: 1rem;
+		text-align: center;
+		font-size: 1.4rem;
+		line-height: 1.4rem;
+		color: $text-red;
+		border:1px solid $text-red;
+		border-radius:2px;
+		
+	}
+}
+.head-fixed{
+	position:fixed;
+	top:0;
+	left:110%;
+}
+.banner{
+	width:100%;
+	padding:0.5rem 0;
+	background:$banner;
+	color:$text-red-banner;
+	text-align:center;
+	font-size:1.3rem;
+}
+@media screen and (max-width: 320px){
+	.banner{
+		padding:0.8rem 0;
+		font-size:1.2rem;
+	}
+}
+
+
+
+
+.pay-sure{
+	width:100%;
+	padding:0 1rem;
+	margin-top:4rem;
+	margin-bottom:2rem;
+	text-align:center;
+}
+@media screen and (max-width: 320px){
+	.pay-sure{
+		width:100%;
+		margin-top:3rem;
+		text-align:center;
+	}
+}
+.pay-showBanks{
+	width:100%;
+	padding:0 1rem;
+	margin-top:2rem;
+	text-align:right;
+	
+	font-size:1.5rem;
+}
+
+
+.foot{
+	margin-top: -5rem;  
+  	height: 5rem;  
+	width:100%;
+	text-align: center;
+	.logo{
+		img{
+			width: 6rem;
+			height: 2.9rem;
+		}
+	}
+	.logo-text{
+		font-size: 1.2rem;
+		color: $grey;
+	}
+}
+.foot-push{
+	height: 10rem;
+}
+
+.btn{
+	width:100%;
+	padding:1.5rem 0;
+	text-align:center;
+	background:$grey-light;
+	color:#fff;
+	font-size:1.9rem;
+	border:none;
+	border-radius:0.3rem;
+}
+
+.btn-default{
+	background:$grey-light;
+}
+
+.btn-disabled{
+	background:$grey-light;
+}
+
+.btn-red{
+	background:$text-red;
+}
+
+
+
+.g-checkbox{
+	display:inline;
+	position:relative;
+	width:1.6rem;
+	height:1.6rem;
+	.box{
+		position: absolute;
+		top: 0;
+		left: 0;
+		background:#fff;
+	}
+	.tick{
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: none;
+
+	}
+}
+
+//here for checkbox 
+.g-checkbox-selected{
+	.tick{
+		display: inline-block;
+	}
+}
+.g-checkbox-disabled{
+	.box{
+		background:$grey-light;
+	}
+}
+
+
+
+.icon-demo{
+	float: left;
+	position:relative;
+	width:100px;
+	height:100px;
+	text-align:center;
+	line-height:100px;
+	border:1px solid $grey;
+	span{
+		position: absolute;
+		bottom:0;
+		left: 0;
+		right:0;
+		width: 100%;
+		height: 15px;
+		font-size: 12px;
+	}
+}
+.icon-demo:hover{
+	background:$grey-light;
+}
+.gl-spline{
+	width:100%;
+	height:1px;
+	overflow:hidden;
+	background:$grey-light;
+}
+
+.a-blue{
+	color:$blue;
+}
+
+.gl-trace{
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	width: 18rem;
+	margin-left: -9rem;
+	background:$grey-dark;
+	color:$grey-light;
+	z-index:1000;
+	border-radius: 5px;
+	padding:2rem;
+	font-size:1.3rem;
+	text-align:center;
+}
+
+
+
+
+
+
+
+
