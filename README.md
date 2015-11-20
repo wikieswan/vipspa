@@ -1,5 +1,35 @@
 # vipspa
-a spa framework 
+
+一个微型的SPA框架，只有2kB！依赖zepto或者jquery。
+
+## 目标
+
+市面上有大量的SPA框架，有大而全的Angularjs、自定义很强的Backbonejs等。对于追求极致小得移动端来说，
+都比较大，重！
+
+鉴于此，开发了一个微型的SPA框架。框架只提供路由控制和几个简单的传参API，具体的代码组织完全自主化。
+
+你可以用requirejs做模块化开发，然后rjs或者webpacket打包。当然seajs也可以的！选择你熟悉的。
+
+你可以用knockoutjs、reactjs、vuejs等mvvm库做双向绑定。对于复杂的项目来说这是有必要的，代码量会下降很多，代码可维护性更强。你熟悉那个就用选择哪个。
+
+至于UI，你想怎么写都可以。
+
+项目有两个例子，在example/下，分别是pure、giant。两个例子都基于gulp，下载下来后，3步可以看效果：
+
+    1 cd pure 
+
+    2 npm install
+
+    3 gulp 
+
+ps：如果对gulp不熟悉，请把项目文件放入任何静态服务器，如Apache、nginx等。
+
+pure 是个不引入其他库（require或者mvvm库），它是一个纯vipspajs 构建的单页面应用。
+
+giant 是一个配合requirejs和knockoutjs做的一个例子。
+
+
 
 ## API
 
