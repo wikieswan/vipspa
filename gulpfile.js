@@ -26,7 +26,7 @@ gulp.task('copy',function () {
         .pipe(gulp.dest(path.example[1]));
 });
 
-gulp.task('script',['clean'], function() {
+gulp.task('script', function() {
     var version  = packageJson.version;
      gulp.src(path.js)
         .pipe(jshint())

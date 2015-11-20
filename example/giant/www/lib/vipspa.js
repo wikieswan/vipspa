@@ -1,10 +1,7 @@
 (function(){
-
     function Vipspa(){
         
     }
-
-
     Vipspa.prototype.start = function(config){
         var self = this;
         self.routerMap = config.router;
@@ -13,9 +10,8 @@
         window.onhashchange = function(){
             startRouter();
         };
-    }
+    };
     var messageStack = [];
-
     // {
     //     'id': 'home_bindcard',
     //     'content': {
@@ -29,7 +25,7 @@
             }
         });
         return msg;
-    }
+    };
 
     Vipspa.prototype.setMessage = function(obj){
         var _obj = JSON.parse(JSON.stringify(obj));
@@ -38,9 +34,29 @@
                 e = _obj;
                 return false;
             }
-        })
+        });
         messageStack.push(_obj);
-    }
+    };
+    Vipspa.prototype.delMessage = function(id){
+        if(typeof id==='undefined'){
+            return false;
+        }
+        var index = 0;
+        $.each(messageStack,function(i,e){
+            if(e.id===id){
+                index = i;
+            }
+        });
+        $.each(messageStack,function(i,e){
+            if(i>index){
+                messageStack[i-1] = e;
+            }
+        });
+    };
+    Vipspa.prototype.clearMessage = function(id){
+        var index = 0;
+        messageStack = [];
+    };
     
     Vipspa.prototype.stringify = function(routerUrl,paramObj){
         var paramStr='' ,hash;
@@ -55,7 +71,7 @@
             hash = routerUrl + '?' + paramStr;
         }
         return hash;
-    }
+    };
     Vipspa.prototype.parse = function(routerHash){
         var hash = typeof routerHash ==='undefined'?location.hash:routerHash;
         var obj = {
@@ -68,8 +84,8 @@
             return obj;
         }
 
-        if(pIndex>-1){//? 有参数
-            url = hash.substring(1,pIndex)
+        if(pIndex>-1){
+            url = hash.substring(1,pIndex);
             var paramStr = hash.substring(pIndex+1);
             var paramArr = paramStr.split('&');
             
@@ -79,7 +95,7 @@
                     val;
                 key = item[0];
                 val = item[1];
-                if(key!=''){
+                if(key!==''){
                     param[key] = decodeURIComponent(val);
                 }
                 
@@ -87,18 +103,18 @@
             });
         }
         else{
-            url = hash.substring(1)
+            url = hash.substring(1);
             param = {};
         }
         return {
             url:url,
             param: param
-        }
-    }
+        };
+    };
     function routerAction (routeObj){
         var routerItem = vipspa.routerMap[routeObj.url];
         if(typeof routerItem==='undefined'){
-            var defaultsRoute = vipspa.routerMap.defaults
+            var defaultsRoute = vipspa.routerMap.defaults;
             routerItem = vipspa.routerMap[defaultsRoute];
             location.hash = defaultsRoute;
             return false;
