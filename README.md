@@ -58,7 +58,7 @@ html代码
     </script>
     
     <script type="text/javascript" src="lib/zepto-1.1.4.min.js"></script>
-    <script type="text/javascript" src="lib/vipspa.01.0.min.js"></script>
+    <script type="text/javascript" src="lib/vipspa.min.js"></script>
     <script type="text/javascript">
     $(function(){
         vipspa.start({
