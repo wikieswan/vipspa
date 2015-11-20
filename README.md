@@ -29,7 +29,64 @@ pure 是个不引入其他库（require或者mvvm库），它是一个纯vipspaj
 
 giant 是一个配合requirejs和knockoutjs做的一个例子。
 
+## 快速开始
 
+html代码
+
+```html
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" >
+    <title>vipspa demo</title>
+</head>
+<body>
+    <ul>
+        <li><a href="#home">首页</a></li>
+        <li><a href="#content">公司简介</a></li>
+        <li><a href="#contact">联系我们</a></li>
+    </ul>
+    <div id="ui-view"></div><!--view区域，必须，id可以随意起，但是需要和js配置代码一致-->
+    <script type="text/html" id="error">
+        <!--可以自定义错误信息,可选，定义一些404页面等-->
+        <div>
+            {{errStatus}}
+        </div>
+        <div>
+            {{errContent}}
+        </div>
+    </script>
+    
+    <script type="text/javascript" src="lib/zepto-1.1.4.min.js"></script>
+    <script type="text/javascript" src="lib/vipspa.01.0.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        vipspa.start({
+            view: '#ui-view',
+            router: {
+                'home': {
+                    templateUrl: 'views/home.html',
+                    controller: 'js/app/home.js'
+                },
+                'content': {
+                    templateUrl: 'views/content.html',
+                    controller: 'js/app/content.js'
+                },
+                'contact': {
+                    templateUrl: 'views/contact.html',
+                    controller: 'js/app/contact.js'
+                },
+                'defaults': 'home' //默认路由
+            }
+        });
+
+    });
+    </script>
+</body>
+</html>
+```
+
+接下来只要关注写 'views/home.html' 'js/app/home.js' 的业务代码就好了。
 
 ## API
 
