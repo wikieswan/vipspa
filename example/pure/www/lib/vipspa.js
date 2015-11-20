@@ -113,6 +113,9 @@
                 loadScript(routerItem.controller);
             },
             error: function(xhr, errorType, error){
+                if($('#error').length===0){
+                    return false;
+                }
                 var errHtml = $('#error').html();
                 errHtml = errHtml.replace(/{{errStatus}}/,xhr.status);
                 errHtml = errHtml.replace(/{{errContent}}/,xhr.responseText);
@@ -128,22 +131,22 @@
     }
     
     function loadScript(src, callback) {
-    	$('.scriptDom').remove();
-	    var script = document.createElement('script'),
-	        loaded;
-	    script.setAttribute('src', src);
-	    script.setAttribute('class', 'scriptDom');
-	    if (callback) {
-	      script.onreadystatechange = script.onload = function() {
-	        if (!loaded) {
-	          callback();
-	        }
-	        loaded = true;
-	      };
-	    }
-	    var head = document.getElementsByTagName("head")[0];
-	    (head || document.body).appendChild(script);
-	}
+        $('.scriptDom').remove();
+        var script = document.createElement('script'),
+            loaded;
+        script.setAttribute('src', src);
+        script.setAttribute('class', 'scriptDom');
+        if (callback) {
+          script.onreadystatechange = script.onload = function() {
+            if (!loaded) {
+              callback();
+            }
+            loaded = true;
+          };
+        }
+        var head = document.getElementsByTagName("head")[0];
+        (head || document.body).appendChild(script);
+    }
 
     window.vipspa = new Vipspa();
 })();

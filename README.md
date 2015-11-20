@@ -168,9 +168,14 @@ console.log(param);
 
 ```
 
+### delMessage(messageId)
+
+作用：删除指定消息
 
 
+### clearMessage()
 
+作用：清楚消息队列
 
 
 
