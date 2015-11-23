@@ -33,6 +33,8 @@ ps：如果对gulp不熟悉，请把项目文件放入任何静态服务器，�
 
 是一个配合requirejs和knockoutjs做的一个例子。
 
+关于requirejs打包的例子， [可以参照这篇文章](http://wikieswan.github.io/2015/11/23/how-to-use-rjs-to-packet-requirejs-modules/)
+
 ## 快速开始
 
 html代码
