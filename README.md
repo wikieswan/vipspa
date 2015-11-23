@@ -25,9 +25,13 @@
 
 ps：如果对gulp不熟悉，请把项目文件放入任何静态服务器，如Apache、nginx等。
 
-pure 是个不引入其他库（require或者mvvm库），它是一个纯vipspajs 构建的单页面应用。
+### pure 
 
-giant 是一个配合requirejs和knockoutjs做的一个例子。
+是个不引入其他库（require或者mvvm库），它是一个纯vipspajs 构建的单页面应用。
+
+### giant 
+
+是一个配合requirejs和knockoutjs做的一个例子。
 
 ## 快速开始
 
@@ -90,6 +94,23 @@ html代码
 
 ## API
 
+    //入口函数
+    start(config)
+
+    //路由相关
+    //url 传参
+    |-- stringify(hash,param)
+    |-- parse(hashStr)
+
+    //内存 传参
+    |-- setMessage(param)
+    |-- getMessage(messageId)
+    |-- delMessage(messageId)
+    |-- clearMessage()
+
+
+
+
 ### 1 start(config)
 
 作用 ： 配置SPA路由信息
@@ -119,34 +140,38 @@ html代码
 
 参数解释
 
-1 view
+#### view
 
 ```javascript
-	config.view = '#ui-view'
+config.view = '#ui-view'
 ```  
 index.html中展示view视图的div（jquery DOM）。
 
-2 router
+#### router
 
 ```javascript
-	config.router = {
-		'home': {
-	        templateUrl: 'views/home.html',
-	        controller: 'js/app/home.js'
-	    },
-	    'defaults': 'home' //默认路由
-	}
+config.router = {
+	'home': {
+        templateUrl: 'views/home.html',
+        controller: 'js/app/home.js'
+    },
+    'defaults': 'home' //默认路由
+}
 ```  
 router里面配置所有的路由信息，```'defaults'``` 用来设置默认路由，即不在路由规则里面的路由将展示 ```'defaults'``` 的view。
 针对其中的某个路由，比如 ```'home'``` ，需要两个值，分别是 ```templateUrl``` 、```controller``` 。```templateUrl``` 指向对应的view页面路径，是一个html片段；```controller```指向视图的js逻辑代码路径。
 
-通过以上信息，vipspa就可以知道每个视图对应的html片段和js代码，以及如果对于不在路由规则内的路由的处理方式。
+通过以上信息，vipspa就可以知道每个视图对应的html片段和js代码，以及如果对于不在路由规则内的路由按照defults方式的处理。
 
 ### 2 stringify(hash,param)
 
 作用：根据 hash 和 param 生成完整的hash串，为view间跳转传参准备。
 
-参数：hash —— 某个view的路由配置信息，比如 ```'home'```；param —— 需要传递的参数，一个对象类型的值，比如 {name:'Jack'}
+参数：
+
+hash —— 某个view的路由配置信息，比如 ```'home'```；
+
+param —— 需要传递的参数，一个对象类型的值，比如 {name:'Jack'}
 
 使用场景：浏览器url传参是使用。
 
@@ -255,14 +280,14 @@ console.log(param);
 
 ```
 
-### delMessage(messageId)
+### 6 delMessage(messageId)
 
 作用：删除指定消息
 
 
-### clearMessage()
+### 7 clearMessage()
 
-作用：清楚消息队列
+作用：清除消息队列
 
 
 
