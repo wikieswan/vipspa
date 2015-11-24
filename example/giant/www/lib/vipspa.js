@@ -6,6 +6,7 @@
         var self = this;
         self.routerMap = config.router;
         self.mainView = config.view;
+        self.errorTemplateId = config.errorTemplateId;
         startRouter();
         window.onhashchange = function(){
             startRouter();
@@ -129,10 +130,10 @@
                 loadScript(routerItem.controller);
             },
             error: function(xhr, errorType, error){
-                if($('#error').length===0){
+                if($(vipspa.errorTemplateId).length===0){
                     return false;
                 }
-                var errHtml = $('#error').html();
+                var errHtml = $(vipspa.errorTemplateId).html();
                 errHtml = errHtml.replace(/{{errStatus}}/,xhr.status);
                 errHtml = errHtml.replace(/{{errContent}}/,xhr.responseText);
                 $(vipspa.mainView).html(errHtml);
@@ -156,7 +157,8 @@
             document.documentElement.removeChild(script);
             script = null;
             if (!loaded) {
-              callback();
+                if(typeof callback==='function')
+                    callback();
             }
             loaded = true;
         };

@@ -83,7 +83,8 @@ html代码
                     controller: 'js/app/contact.js'
                 },
                 'defaults': 'home' //默认路由
-            }
+            },
+            errorTemplateId: '#error'  //可选的错误模板，用来处理加载html模块异常时展示错误内容
         });
 
     });
@@ -136,7 +137,8 @@ html代码
                 controller: 'js/app/contact.js'
             },
             'defaults': 'home' //默认路由
-        }
+        },
+        errorTemplateId: '#error'
     }
 ```    
 
@@ -164,6 +166,14 @@ router里面配置所有的路由信息，```'defaults'``` 用来设置默认路
 针对其中的某个路由，比如 ```'home'``` ，需要两个值，分别是 ```templateUrl``` 、```controller``` 。```templateUrl``` 指向对应的view页面路径，是一个html片段；```controller```指向视图的js逻辑代码路径。
 
 通过以上信息，vipspa就可以知道每个视图对应的html片段和js代码，以及如果对于不在路由规则内的路由按照defults方式的处理。
+
+#### errorTemplateId
+
+```javascript
+config.errorTemplateId
+```
+
+可选的错误模板，用来处理加载html模块异常时展示错误内容,注意：错误模板需要包含 ```{{errStatus}}``` ```{{errContent}}``` 这两个关键字，分别展示错误状态码和错误信息 。至于模板样式，你可以自己定义css样式进行美化。
 
 ### 2 stringify(hash,param)
 

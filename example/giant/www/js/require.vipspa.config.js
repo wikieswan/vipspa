@@ -12,6 +12,7 @@ requirejs.config({
 $(function(){
 	vipspa.start({
         view: '#ui-view',
+        errorTemplateId: '#error', // 可选
         router: {
             'home': {
                 templateUrl: 'views/home.html',
