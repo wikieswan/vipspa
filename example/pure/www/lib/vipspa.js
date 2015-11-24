@@ -147,21 +147,20 @@
     }
     
     function loadScript(src, callback) {
-        $('.scriptDom').remove();
+        
         var script = document.createElement('script'),
             loaded;
         script.setAttribute('src', src);
-        script.setAttribute('class', 'scriptDom');
-        if (callback) {
-          script.onreadystatechange = script.onload = function() {
+        script.onreadystatechange = script.onload = function() {
+            script.onreadystatechange = null;
+            document.documentElement.removeChild(script);
+            script = null;
             if (!loaded) {
               callback();
             }
             loaded = true;
-          };
-        }
-        var head = document.getElementsByTagName("head")[0];
-        (head || document.body).appendChild(script);
+        };
+        document.documentElement.appendChild(script);
     }
 
     window.vipspa = new Vipspa();
