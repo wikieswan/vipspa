@@ -12,7 +12,7 @@ $(function(){
 	});
 
 	$('#submit1').click(function(){
-		var tel = $('telno').val();
+		var tel = $('#telno').val();
 		if(tel===''){
 			alert('请输入手机号码')
 		}

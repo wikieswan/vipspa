@@ -7,6 +7,7 @@
         self.routerMap = config.router;
         self.mainView = config.view;
         self.errorTemplateId = config.errorTemplateId;
+        self.catchHtmls = [];
         startRouter();
         window.onhashchange = function(){
             startRouter();
@@ -120,7 +121,15 @@
             location.hash = defaultsRoute;
             return false;
         }
+        var isExitCatch = isRouterUrlExitsInCatchHtmls(routerItem.templateUrl);
+        if (isExitCatch) {
+            loadPageHtmlFromCatch(routerItem);
+        } else {
+            fetchHtmlFromServer(routerItem);
+        }
         
+    }
+    function fetchHtmlFromServer(routerItem) {
         $.ajax({
             type: 'GET',
             url: routerItem.templateUrl,
@@ -128,6 +137,7 @@
             success: function(data, status, xhr){
                 $(vipspa.mainView).html(data);
                 loadScript(routerItem.controller);
+                saveHtmlsToCatch(routerItem.templateUrl, data);
             },
             error: function(xhr, errorType, error){
                 if($(vipspa.errorTemplateId).length===0){
@@ -139,6 +149,38 @@
                 $(vipspa.mainView).html(errHtml);
             }
         });
+    }
+    function loadPageHtmlFromCatch(routerItem) {
+        var htmls = getHtmlsFromCatch(routerItem.templateUrl);
+        $(vipspa.mainView).html(htmls);
+        loadScript(routerItem.controller);
+    }
+    function getHtmlsFromCatch(routerUrl) {
+        for(var i=0,e;i<vipspa.catchHtmls.length;i++) {
+            e = vipspa.catchHtmls[i];
+            if (e.routerUrl === routerUrl) {
+                return e.htmls;
+            }
+        }
+        return '';
+    }
+
+    function saveHtmlsToCatch(routerUrl, htmls) {
+        var obj = {
+            routerUrl: routerUrl,
+            htmls: htmls,
+        };
+        vipspa.catchHtmls.push(obj);
+    }
+
+    function isRouterUrlExitsInCatchHtmls(routerUrl) {
+        for(var i=0,e;i<vipspa.catchHtmls.length;i++) {
+            e = vipspa.catchHtmls[i];
+            if (e.routerUrl === routerUrl) {
+                return true;
+            }
+        }
+        return false;
     }
    
     function startRouter  () {
