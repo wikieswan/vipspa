@@ -69,10 +69,11 @@ html代码
     $(function(){
         vipspa.start({
             view: '#ui-view',
+            errorTemplateId: '#error', // 可选
             router: {
                 'home': {
                     templateUrl: 'views/home.html',
-                    controller: 'js/app/home.js'
+                    controller: 'js/app/home.js',
                 },
                 'content': {
                     templateUrl: 'views/content.html',
@@ -82,9 +83,25 @@ html代码
                     templateUrl: 'views/contact.html',
                     controller: 'js/app/contact.js'
                 },
+                'user': {
+                    templateUrl: 'views/user.html',
+                    controller: 'js/app/user.js',
+                    subView: '#ui-sub-view',
+                    children: [
+                        {
+                            name: 'login',
+                            templateUrl: 'views/login.html',
+                            controller: 'js/app/login.js',
+                        },
+                        {
+                            name: 'regist',
+                            templateUrl: 'views/regist.html',
+                            controller: 'js/app/regist.js',
+                        }
+                    ]
+                },
                 'defaults': 'home' //默认路由
-            },
-            errorTemplateId: '#error'  //可选的错误模板，用来处理加载html模块异常时展示错误内容
+            }
         });
 
     });
@@ -301,8 +318,9 @@ console.log(param);
 
 作用：清除消息队列
 
+# 更新记录
 
-
+## 嵌套路由 - 2018-12-16
 
 
 
