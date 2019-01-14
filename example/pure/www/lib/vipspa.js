@@ -135,20 +135,46 @@
         var path = hashPathAndParams.path;
         var routers = hashPathAndParams.routers;
         var param = hashPathAndParams.param;
+        
+        // 空路由
+        if(!hashPathAndParams){
+            var defaultsRoute = vipspa.routerMap.defaults;
+            var routerItem = vipspa.routerMap[defaultsRoute];
+            loaderHtml(vipspa.mainView, routerItem);
+            location.hash = defaultsRoute;
+            return false;
+        }
 
         // 普通一级路由
         if (routers.length === 1) {
-            OLD_ROUTER = hashPathAndParams
-
             var url = routers[0];
             var routerItem = vipspa.routerMap[url];
-
             if(typeof routerItem==='undefined'){
                 console.error('路由匹配失败，请检查。',hashPathAndParams)
                 return false;
             }
 
-            loaderHtml(vipspa.mainView, routerItem);
+            if (OLD_ROUTER === null) {
+                loaderHtml(vipspa.mainView, routerItem);
+                OLD_ROUTER = hashPathAndParams
+                return false
+            }
+
+            var hasParentRouterChange = OLD_ROUTER.routers[0] !== hashPathAndParams.routers[0]
+            if (hasParentRouterChange) {
+                loaderHtml(vipspa.mainView, routerItem)
+            } else {
+                var url = OLD_ROUTER.routers[0];
+                var subUrl = OLD_ROUTER.routers[1];
+
+                var subView = routerItem.subView;
+                var children = routerItem.children;
+                var subRouterItem = getSubRouterItem(children, subUrl);
+
+                loaderHtml(subView, {}, function(){}, true)
+            }
+
+            OLD_ROUTER = hashPathAndParams
         }
         // 二级嵌套路由
         else if (routers.length === 2) {
@@ -156,7 +182,7 @@
             if (OLD_ROUTER === null) {
                 OLD_ROUTER = hashPathAndParams
             } else {
-                hasParentRouterChange = OLD_ROUTER[0] !== hashPathAndParams[0]
+                hasParentRouterChange = OLD_ROUTER.routers[0] !== hashPathAndParams.routers[0]
                 OLD_ROUTER = hashPathAndParams
             }
 
@@ -203,13 +229,22 @@
         return subRouter;
     }
 
-    function loaderHtml(domId, routerItem, cb) {
+    // 向dom中写入指定的html 或者清空
+    function loaderHtml(domId, routerItem, cb, clearable) {
+        if (clearable) {
+            clearDomHtmlContent(domId)
+            return
+        }
         var isExitCatch = isRouterUrlExitsInCatchHtmls(routerItem.templateUrl);
         if (isExitCatch) {
             loadPageHtmlFromCatch(domId, routerItem, cb);
         } else {
             fetchHtmlFromServer(domId, routerItem, cb);
         }
+    }
+
+    function clearDomHtmlContent(domId) {
+        $(domId).html('')
     }
 
     function fetchHtml(url, cbSuccess, cbFail) {
